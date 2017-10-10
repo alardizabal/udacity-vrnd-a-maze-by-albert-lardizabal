@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class Door : MonoBehaviour 
 {
-    public Animator doorAnimation;
 	public AudioClip doorLocked;
 	public AudioClip doorOpened;
     public Key key;
-    private bool _isUnlocked = false;
-    private bool _isOpening = false;
-    // Create a boolean value called "locked" that can be checked in OnDoorClicked() 
-    // Create a boolean value called "opening" that can be checked in Update() 
-
+	// Create a boolean value called "locked" that can be checked in OnDoorClicked() 
+	private bool _isUnlocked = false;
+	// Create a boolean value called "opening" that can be checked in Update() 
+	private bool _isOpening = false;
 
     void Update() {
         // If the door is opening and it is not fully raised
         // Animate the door raising up
-        if (!_isOpening) {
-            doorAnimation.StartPlayback();
+        if (_isOpening && transform.position.y < 8.0f) {
+            transform.Translate(0, 8.0f * Time.deltaTime, 0, Space.World);
         }
     }
 
